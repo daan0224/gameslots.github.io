@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #282c34;
+            color: white;
+        }
+        .slot-machine {
+            margin: 50px auto;
+            width: 300px;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            background-color: #444;
+            padding: 20px;
+            box-shadow: 0px 0px 15px 5px #000;
+        }
+        .reels {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .reel {
+            width: 80px;
+            height: 80px;
+            background-color: #222;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .spin-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .spin-button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Slot Machine Game</h1>
+    <div class="slot-machine">
+        <div class="reels">
+            <div class="reel" id="reel1">🍒</div>
+            <div class="reel" id="reel2">🍋</div>
+            <div class="reel" id="reel3">🍊</div>
+        </div>
+        <button class="spin-button" onclick="spinReels()">Spin</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        const symbols = ['🍒', '🍋', '🍊', '🍉', '⭐', '7️⃣'];
+
+        function getRandomSymbol() {
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        function spinReels() {
+            const reel1 = document.getElementById('reel1');
+            const reel2 = document.getElementById('reel2');
+            const reel3 = document.getElementById('reel3');
+            const result = document.getElementById('result');
+
+            // Add spinning animation
+            reel1.textContent = '🔄';
+            reel2.textContent = '🔄';
+            reel3.textContent = '🔄';
+            result.textContent = '';
+
+            setTimeout(() => {
+                // Assign random symbols to reels
+                const symbol1 = getRandomSymbol();
+                const symbol2 = getRandomSymbol();
+                const symbol3 = getRandomSymbol();
+                reel1.textContent = symbol1;
+                reel2.textContent = symbol2;
+                reel3.textContent = symbol3;
+
+                // Check for win
+                if (symbol1 === symbol2 && symbol2 === symbol3) {
+                    result.textContent = '🎉 Jackpot! You Win! 🎉';
+                } else {
+                    result.textContent = 'Try Again!';
+                }
+            }, 1000); // Delay to simulate spinning
+        }
+    </script>
+</body>
+</html>
